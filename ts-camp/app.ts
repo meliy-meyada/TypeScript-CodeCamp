@@ -2,11 +2,19 @@
 //   name: string;
 //   age: number;
 // } = {
-const person = {
+const person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: [number, string];
+} = {
   name: 'Meyada',
   age: 26,
-  hobbies: ['Sports', 'Coding']
+  hobbies: ['Sports', 'Coding'],
+  role: [2, 'author']
 };
+person.role.push('admin');
+
 let favoriteAc: string[];
 favoriteAc = ['Coding'];
 
