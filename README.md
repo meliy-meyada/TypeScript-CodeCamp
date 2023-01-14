@@ -1,5 +1,5 @@
 ## TypeScript-CodeCamp
-Udemy: This course covers everything you need to know about TypeScript, including features like decorators and advanced types. By Insturctor Maximilian Schwarzmüller
+Udemy: This course about TypeScript, including features like decorators and advanced types. By Insturctor Maximilian Schwarzmüller
 ---
 # My journey with TypeScript is interesting.
 
