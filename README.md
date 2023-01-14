@@ -29,7 +29,7 @@ if (person.role === Role.AUTHOR) {
 ```
 > This code makes use of TypeScript's enumeration feature to define a set of named constants (ADMIN, READ_ONLY, AUTHOR) that are used to set the value of the role property in the person object. This provides a more readable and maintainable way of setting and comparing the role, rather than using raw string or numeric values. Additionally, the code makes use of the for-of loop and the TypeScript's string array type to log the person's hobbies in uppercase.
 ---
-#### 2. 
+#### 2. Union Aliases.
 ```ts,
 type Combinable = number | string;
 type ConversionDescriptor = 'as-number' | 'as-text';
