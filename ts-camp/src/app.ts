@@ -5,5 +5,5 @@ function clickHandler(msg: string){
 }
 // test comment
 if (button){
-    button.addEventListener('click', clickHandler.bind(null));
+    button.addEventListener('click', clickHandler.bind(null, "You're Welcome!"));
 }

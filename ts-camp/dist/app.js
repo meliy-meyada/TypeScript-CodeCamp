@@ -4,5 +4,5 @@ function clickHandler(msg) {
     console.log('Clicked!' + msg);
 }
 if (button) {
-    button.addEventListener('click', clickHandler.bind(null));
+    button.addEventListener('click', clickHandler.bind(null, "You're Welcome!"));
 }
