@@ -12,3 +12,4 @@ function clickHandler(msg) {
 if (button) {
     button.addEventListener('click', clickHandler.bind(null, "You're Welcome!"));
 }
+//# sourceMappingURL=app.js.map
