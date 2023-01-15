@@ -1,6 +1,7 @@
 const button = document.querySelector('button')!;
 
 function clickHandler(msg: string){
+  let userName = 'Meyade';
   console.log('Clicked!'+ msg);
 }
 // test comment
