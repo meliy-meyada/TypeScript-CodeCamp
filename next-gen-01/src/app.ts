@@ -22,4 +22,18 @@ const button = document.querySelector('button');
 if (button) {
   button.addEventListener('click', event => console.log(event));
 }
-printOutput(add(5, 2)); 
+printOutput(add(5)); 
+
+const hobbies = ['coding', 'cooking'];
+const activeHobbies = ['dive']
+
+activeHobbies.push( ...hobbies );
+
+
+
+const person = {
+  name: 'meya',
+  age: 25
+};
+
+const coppiedPerson = { ...person };
