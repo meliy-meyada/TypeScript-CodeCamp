@@ -89,3 +89,20 @@ The code also includes examples of how the function can be used with different i
 - ``"jsxFragmentFactory": "",`` This option allows developers to specify the JSX Fragment reference that should be used for fragments when targeting React JSX emit. This can be useful when working with React and you want to specify a custom Fragment type.
 - ``"jsxImportSource": "",`` This option allows developers to specify the module specifier that should be used to import the JSX factory functions when using 'jsx: react-jsx*'. This can be useful when working with React and you want to specify a custom import path for the JSX factory functions.
 - ``"reactNamespace": "",`` This option allows developers to specify the object invoked for 'createElement'. This can be useful when working with React and you want to specify a custom namespace for the React functions.
+---
+
+#### 4.  "private" and "public" Access Modifiers"
+
+- ``"Public" ``members are accessible from anywhere, both within the class and outside of it. This is the default access level for class members if no access modifier is specified.
+
+- ``"Private"`` members, on the other hand, are only accessible within the class in which they are defined. They cannot be accessed or modified from outside the class.
+  
+```ts,
+class MyClass {
+    public myPublicField = 'I am public';
+    private myPrivateField = 'I am private';
+}
+let myObject = new MyClass();
+console.log(myObject.myPublicField); // Output: "I am public"
+console.log(myObject.myPrivateField); // Error: Property 'myPrivateField' is private and only accessible within class 'MyClass'.
+```
