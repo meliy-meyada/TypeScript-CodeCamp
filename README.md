@@ -204,3 +204,27 @@ accounting.addEmployee('Malee');
 accounting.printReports();
 accounting.printEmployeeInformattion();
 ```
+---
+
+#### 7. Getters & Setters
+
+- In TypeScript, getters and setters are used to control access to the properties of an object. A getter is a method that is used to retrieve the value of a property, while a setter is a method that is used to set the value of a property.
+```ts,
+class MyClass {
+    private _myProperty: string;
+    get myProperty(): string {
+        return this._myProperty;
+    }
+    set myProperty(value: string) {
+        this._myProperty = value;
+    }
+}
+
+let myObject = new MyClass();
+myObject.myProperty = 'new value';
+console.log(myObject.myProperty); // Output: "new value"
+```
+> In this example, the ``"myProperty"``property is defined as private, and can only be accessed and modified using the public getter and setter methods. 
+> Getters and setters are useful in situations where you want to control access to a property, or perform additional logic when a property is accessed or modified. For example, you can use a setter to validate the value being set before it is stored, or use a getter to return a computed value based on the current state of the object. 
+> Also, with the latest version of TypeScript, you can use the getter and setter syntax directly on the property, it's called the ``"Accessor Property"``
+
