@@ -106,3 +106,22 @@ let myObject = new MyClass();
 console.log(myObject.myPublicField); // Output: "I am public"
 console.log(myObject.myPrivateField); // Error: Property 'myPrivateField' is private and only accessible within class 'MyClass'.
 ```
+
+---
+
+#### 5. "readonly" Properties
+
+- ``"readonly" ``access modifier is used to create properties that can only be read and cannot be modified. Once a readonly property is set, its value cannot be changed.
+
+```ts,
+ class Department {
+  // private id: string;
+  // private name: string;
+  private employees: string[] = [];
+
+  constructor(private readonly id: string, public name: string ) {
+    // this.id = id;
+    // this.name = n;
+  }
+ }
+```
