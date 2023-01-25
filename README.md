@@ -250,3 +250,22 @@ console.log(square.getArea()); // Output: 25
 
 ```
 > An abstract class in TypeScript is a class that cannot be instantiated, but can be extended by other classes. It serves as a base class for other classes and provides a common interface for derived classes. Abstract classes are defined using the ``"abstract"`` keyword and can contain both abstract and non-abstract members (methods and properties). An abstract class must be extended by a derived class, which must implement all the abstract methods and properties defined in the base class. It's important to note that you can't create an instance of an abstract class and can't override a non-abstract method with an abstract one.
+---
+
+#### 9. Singletons & Private Constructors
+```ts, 
+class Singleton {
+    private static instance: Singleton;
+    private constructor() {}
+    static getInstance(): Singleton {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
+        }
+        return Singleton.instance;
+    }
+}
+let singleton1 = Singleton.getInstance();
+let singleton2 = Singleton.getInstance();
+console.log(singleton1 === singleton2); // Output: true
+```
+> A singleton is a design pattern that ensures that a class has only one instance and provides a global point of access to that instance. It can be implemented in TypeScript using a private constructor and a private static instance variable. The private constructor prevents other classes from instantiating the class directly, and the private static instance variable holds the single instance of the class, which can be accessed using a public static method ``"getInstance"``. The use of private constructors can also prevent other classes from instantiating an object of the class, allowing the developer to control the way objects are created, and to ensure that a class has only one instance, like in the singleton pattern.
