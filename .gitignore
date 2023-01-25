@@ -2,3 +2,5 @@
 .DS_Store
 ts-camp/package-lock.json
 .vscode/launch.json
+cl-interfaces-01/package-lock.json
+cl-interfaces-01/.npmrc

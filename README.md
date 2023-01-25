@@ -227,4 +227,26 @@ console.log(myObject.myProperty); // Output: "new value"
 > In this example, the ``"myProperty"``property is defined as private, and can only be accessed and modified using the public getter and setter methods. 
 > Getters and setters are useful in situations where you want to control access to a property, or perform additional logic when a property is accessed or modified. For example, you can use a setter to validate the value being set before it is stored, or use a getter to return a computed value based on the current state of the object. 
 > Also, with the latest version of TypeScript, you can use the getter and setter syntax directly on the property, it's called the ``"Accessor Property"``
+---
 
+#### 8. Abstract Classes
+```ts,
+abstract class Shape {
+    abstract getArea(): number;
+}
+
+class Square extends Shape {
+    side: number;
+    constructor(side: number) {
+        super();
+        this.side = side;
+    }
+    getArea(): number {
+        return this.side * this.side;
+    }
+}
+let square = new Square(5);
+console.log(square.getArea()); // Output: 25
+
+```
+> An abstract class in TypeScript is a class that cannot be instantiated, but can be extended by other classes. It serves as a base class for other classes and provides a common interface for derived classes. Abstract classes are defined using the ``"abstract"`` keyword and can contain both abstract and non-abstract members (methods and properties). An abstract class must be extended by a derived class, which must implement all the abstract methods and properties defined in the base class. It's important to note that you can't create an instance of an abstract class and can't override a non-abstract method with an abstract one.
