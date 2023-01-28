@@ -269,3 +269,25 @@ let singleton2 = Singleton.getInstance();
 console.log(singleton1 === singleton2); // Output: true
 ```
 > A singleton is a design pattern that ensures that a class has only one instance and provides a global point of access to that instance. It can be implemented in TypeScript using a private constructor and a private static instance variable. The private constructor prevents other classes from instantiating the class directly, and the private static instance variable holds the single instance of the class, which can be accessed using a public static method ``"getInstance"``. The use of private constructors can also prevent other classes from instantiating an object of the class, allowing the developer to control the way objects are created, and to ensure that a class has only one instance, like in the singleton pattern.
+
+---
+
+#### 10. Using Interfaces with Classes
+
+```ts,
+interface Person {
+    firstName: string;
+    lastName: string;
+    sayHello(): string;
+}
+
+class Student implements Person {
+    firstName: string;
+    lastName: string;
+    sayHello(): string {
+        return `Hello, my name is ${this.firstName} ${this.lastName}.`;
+    }
+}
+```
+> the interface ``"Person"`` defines the properties ``"firstName"`` and ``"lastName"`` as well as the method ``"sayHello"``. The class ``"Student"`` implements this interface, meaning that it must have the properties and methods defined in the interface. The class must provide an implementation for the sayHello method, which is defined in the interface. 
+> Using interfaces with classes provides a way to ensure that a class has the properties and methods that it should have, without providing an implementation for them. This can be useful in situations where you want to ensure that a class conforms to a certain structure, or where you want to create a contract for the shape of an object that multiple classes can implement.
