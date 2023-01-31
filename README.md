@@ -291,3 +291,19 @@ class Student implements Person {
 ```
 > the interface ``"Person"`` defines the properties ``"firstName"`` and ``"lastName"`` as well as the method ``"sayHello"``. The class ``"Student"`` implements this interface, meaning that it must have the properties and methods defined in the interface. The class must provide an implementation for the sayHello method, which is defined in the interface. 
 > Using interfaces with classes provides a way to ensure that a class has the properties and methods that it should have, without providing an implementation for them. This can be useful in situations where you want to ensure that a class conforms to a certain structure, or where you want to create a contract for the shape of an object that multiple classes can implement.
+
+---
+
+#### 11. Readonly Interface Properties
+
+ ```ts,
+ interface Point {
+  readonly x: number;
+  readonly y: number;
+}
+
+let point: Point = { x: 10, y: 20 };
+point.x = 30; // Error: Cannot assign to 'x' because it is a read-only property.
+ ```
+
+ > In TypeScript, readonly interface properties are properties in an interface that can only be read, not written to. This is achieved by using the ``readonly`` keyword before the property name. The value of a readonly property must be set at the time of object creation and cannot be changed
