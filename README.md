@@ -307,3 +307,32 @@ point.x = 30; // Error: Cannot assign to 'x' because it is a read-only property.
  ```
 
  > In TypeScript, readonly interface properties are properties in an interface that can only be read, not written to. This is achieved by using the ``readonly`` keyword before the property name. The value of a readonly property must be set at the time of object creation and cannot be changed
+
+---
+
+#### 12. Discriminated Unions
+
+```ts,
+interface Square {
+  kind: "square";
+  size: number;
+}
+
+interface Rectangle {
+  kind: "rectangle";
+  width: number;
+  height: number;
+}
+
+type Shape = Square | Rectangle;
+
+function area(s: Shape) {
+  switch (s.kind) {
+    case "square":
+      return s.size * s.size;
+    case "rectangle":
+      return s.width * s.height;
+  }
+}
+```
+>In TypeScript, a discriminated union is a type that represents a value that can be one of several types. The union is "discriminated" because a property that distinguishes between the different types of the union is used to determine which type the value is. This allows the type system to infer the type of the value, and provide more specific type information when working with the value.
