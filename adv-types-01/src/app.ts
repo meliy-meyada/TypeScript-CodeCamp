@@ -38,6 +38,13 @@ function add(a: Combinable, b: Combinable) {
 const result = add('Meyada', ' Saisan');
 result.split(' ');
 
+const fetchUserData = {
+  id: 'u1',
+  name: 'Meyada',
+  job: {title: 'Software Engineer', description: 'Machine Learning'}
+}
+console.log(fetchUserData.job.title);
+
 // type UnknowEmployee = Employee | Admin;
 
 // function printEmployeeInformation(emp: UnknowEmployee){
