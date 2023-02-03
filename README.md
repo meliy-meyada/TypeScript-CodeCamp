@@ -336,3 +336,12 @@ function area(s: Shape) {
 }
 ```
 >In TypeScript, a discriminated union is a type that represents a value that can be one of several types. The union is "discriminated" because a property that distinguishes between the different types of the union is used to determine which type the value is. This allows the type system to infer the type of the value, and provide more specific type information when working with the value.
+
+---
+
+#### 13. Type Casting
+```ts,
+let value: any = "Hello, world!";
+let str = value as string;
+```
+> In TypeScript, type casting is a way to tell the compiler to treat a value as a specific type, even if its original type is different. This can be useful when working with APIs that return values of a more general type than the actual type of the values, or when working with values that are inferred as a more general type than their actual type.
