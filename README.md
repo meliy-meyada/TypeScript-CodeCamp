@@ -383,3 +383,24 @@ console.log(city); // Output: undefined
 > Optional chaining is a feature in TypeScript (and in many other programming languages) that allows you to access properties or methods of an object without having to check if the object is ``null`` or ``undefined`` first.
 
 > The optional chaining operator ``?``. allows you to safely access properties or methods of an object without having to check if the object is ``null`` or ``undefined``. If the object is ``null`` or ``undefined``, the expression short-circuits and returns ``undefined`` instead of throwing an error.
+
+
+---
+
+#### 16. Working with Constraints
+
+```ts, 
+interface HasName {
+  name: string;
+}
+
+function printName<T extends HasName>(obj: T): void {
+  console.log(obj.name);
+}
+
+let person = { name: "John", age: 30 };
+printName(person); 
+
+let animal = { species: "Dog" };
+```
+> In TypeScript, constraints are used to restrict the types of values that can be used with a generic type. When working with generic types, you can use constraints to ensure that the type of value being used meets certain requirements.
