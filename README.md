@@ -366,3 +366,20 @@ let firstName = formatName("Jane");
 ```
 > In TypeScript, function overloading allows you to declare multiple functions with the same name but different parameter lists. This can be useful when you want to provide different implementations for a function based on the types of its arguments. When calling a function with overloaded signatures, TypeScript will choose the best match based on the types of the arguments being passed.
 
+---
+
+#### 15. Optional Chaining
+
+```ts,
+let user = { name: "John", address: { city: "London" } };
+
+let city = user?.address?.city;
+console.log(city); // Output: "London"
+
+user = null;
+city = user?.address?.city;
+console.log(city); // Output: undefined
+```
+> Optional chaining is a feature in TypeScript (and in many other programming languages) that allows you to access properties or methods of an object without having to check if the object is ``null`` or ``undefined`` first.
+
+> The optional chaining operator ``?``. allows you to safely access properties or methods of an object without having to check if the object is ``null`` or ``undefined``. If the object is ``null`` or ``undefined``, the expression short-circuits and returns ``undefined`` instead of throwing an error.
