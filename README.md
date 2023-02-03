@@ -345,3 +345,24 @@ let value: any = "Hello, world!";
 let str = value as string;
 ```
 > In TypeScript, type casting is a way to tell the compiler to treat a value as a specific type, even if its original type is different. This can be useful when working with APIs that return values of a more general type than the actual type of the values, or when working with values that are inferred as a more general type than their actual type.
+
+---
+
+#### 14. Function Overloads
+
+```ts,
+ function formatName(first: string, last: string): string;
+function formatName(first: string): string;
+function formatName(first: string, last?: string): string {
+  if (last) {
+    return `${first} ${last}`;
+  } else {
+    return first;
+  }
+}
+
+let fullName = formatName("John", "Doe");
+let firstName = formatName("Jane");
+```
+> In TypeScript, function overloading allows you to declare multiple functions with the same name but different parameter lists. This can be useful when you want to provide different implementations for a function based on the types of its arguments. When calling a function with overloaded signatures, TypeScript will choose the best match based on the types of the arguments being passed.
+
