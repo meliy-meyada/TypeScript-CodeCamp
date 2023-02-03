@@ -42,8 +42,15 @@ const fetchUserData = {
   id: 'u1',
   name: 'Meyada',
   job: {title: 'Software Engineer', description: 'Machine Learning'}
-}
-console.log(fetchUserData.job.title);
+};
+
+console.log(fetchUserData?.job?.title);
+
+const userInput = '';
+
+const storeData = userInput || 'DEFAULT';
+
+console.log(storeData);
 
 // type UnknowEmployee = Employee | Admin;
 
