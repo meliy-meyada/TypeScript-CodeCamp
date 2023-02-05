@@ -437,3 +437,43 @@ userService.getUser(1);
 > The ``logMethod`` decorator is used to log information about a method before and after it is called. The ``logMethod`` decorator takes three arguments: ``target``, ``propertyKey``, and ``descriptor``. The ``target`` argument is the instance of the class that the method belongs to, the ``propertyKey`` argument is the name of the method, and the ``descriptor`` argument is a property descriptor that can be used to modify the behavior of the method.
 
 > In the implementation of the ``logMethod`` decorator, we use the ``descriptor.value`` property to get a reference to the original method, and then we use the ``descriptor.value`` property to assign a new function that wraps the original method and logs information about it before and after it is called.
+
+---
+
+#### 18. Diving into Property Decorators
+
+> A property decorator in TypeScript is a special syntax that can be used to modify the behavior of a class property. Property decorators can be used to add metadata to your code, to change the behavior of a property, or to implement aspect-oriented programming (AOP) techniques.
+
+```ts, 
+function logProperty(target: any, propertyKey: string) {
+  let _val = target[propertyKey];
+  const getter = function() {
+    console.log(`Getting value for property ${propertyKey}: ${_val}`);
+    return _val;
+  };
+  const setter = function(newVal: any) {
+    console.log(`Setting value for property ${propertyKey}: ${newVal}`);
+    _val = newVal;
+  };
+  Object.defineProperty(target, propertyKey, {
+    get: getter,
+    set: setter
+  });
+}
+
+class User {
+  @logProperty
+  name: string;
+}
+
+const user = new User();
+user.name = "John";
+console.log(user.name);
+// Output:
+// Setting value for property name: John
+// Getting value for property name: John
+```
+
+>In this example, the ``logProperty`` decorator is used to log information about a property whenever its value is set or retrieved. The ``logProperty`` decorator takes two arguments: ``target`` and ``propertyKey``. The ``target`` argument is the instance of the class that the property belongs to, and the ``propertyKey`` argument is the name of the property.
+
+>In the implementation of the ``logProperty`` decorator, we use the ``Object.defineProperty`` method to define a new property with a getter and a setter that log information about the property whenever its value is set or retrieved.
