@@ -32,4 +32,12 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   }
   return [element, descriptionText];
 }
-console.log(countAndDescribe('Hi there!'));
+console.log(countAndDescribe(['Cooking', 'Sport']));
+
+function  extracAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U 
+){
+  return 'Value: ' + obj[key];
+}
+extracAndConvert({ name: 'Meya' }, 'name')
