@@ -509,3 +509,39 @@ console.log(user);
 ```
 
 >The ``logClass`` decorator logs information about the creation of an instance of the ``User`` class and the call to its constructor. The decorator returns a new class that extends the original ``User`` class and adds logging to the constructor.
+
+
+---
+
+#### 19. Autobind Decorator
+
+>The Autobind decorator is a TypeScript decorator that can be used to automatically bind the ``this`` keyword to the correct value when calling a method. This is useful when you want to ensure that the method always refers to the instance of the class, even when the method is passed as a callback or used in a different context.
+```ts,
+function autobind(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjustedDescriptor: PropertyDescriptor = {
+    configurable: true,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    }
+  };
+  return adjustedDescriptor;
+}
+
+class User {
+  name = "John";
+  @autobind
+  getName() {
+    return this.name;
+  }
+}
+
+const user = new User();
+const getName = user.getName;
+console.log(getName());
+// Output:
+// John
+```
+
+> The Autobind decorator is used to bind the ``this`` keyword to the correct value when calling the ``getName`` method. This means that the method can be called as a standalone function, and it will still refer to the ``User`` instance, not the global context.
