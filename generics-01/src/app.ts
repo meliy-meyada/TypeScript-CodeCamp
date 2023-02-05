@@ -41,3 +41,39 @@ function  extracAndConvert<T extends object, U extends keyof T>(
   return 'Value: ' + obj[key];
 }
 extracAndConvert({ name: 'Meya' }, 'name')
+
+class DataStorage<T extends string | number | boolean > {
+  private data: T[] = [];
+
+  addItem(item: T){
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if(this.data.indexOf(item) === -1){
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1) // -1
+  }
+
+  getItem() {
+    return [...this.data];
+  }
+
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Meya');
+textStorage.addItem('Malee');
+textStorage.removeItem('Meya');
+console.log(textStorage.getItem());
+
+const numberStorage = new DataStorage<number>();
+
+// const objStorage = new DataStorage<object>();
+// const meyaObj = { name: 'Meya' };
+// objStorage.addItem(meyaObj);
+// objStorage.addItem({ name: 'Malee' });
+// // ...
+// objStorage.removeItem(meyaObj);
+// console.log(objStorage.getItem());
