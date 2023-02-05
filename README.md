@@ -477,3 +477,35 @@ console.log(user.name);
 >In this example, the ``logProperty`` decorator is used to log information about a property whenever its value is set or retrieved. The ``logProperty`` decorator takes two arguments: ``target`` and ``propertyKey``. The ``target`` argument is the instance of the class that the property belongs to, and the ``propertyKey`` argument is the name of the property.
 
 >In the implementation of the ``logProperty`` decorator, we use the ``Object.defineProperty`` method to define a new property with a getter and a setter that log information about the property whenever its value is set or retrieved.
+
+
+---
+
+#### 19. Returning (and changing) a Class in a Class Decorator
+>In TypeScript, class decorators can return a new class that will replace the original one. This is useful when you want to change the behavior or properties of a class.
+
+```ts,
+function logClass(target: any) {
+  console.log(`Creating instance of class ${target.name}`);
+  return class extends target {
+    constructor(...args: any[]) {
+      console.log(`Calling constructor of class ${target.name}`);
+      super(...args);
+    }
+  };
+}
+
+@logClass
+class User {
+  constructor(public name: string) {}
+}
+
+const user = new User("John");
+console.log(user);
+// Output:
+// Creating instance of class User
+// Calling constructor of class User
+// User { name: "John" }
+```
+
+>The ``logClass`` decorator logs information about the creation of an instance of the ``User`` class and the call to its constructor. The decorator returns a new class that extends the original ``User`` class and adds logging to the constructor.
