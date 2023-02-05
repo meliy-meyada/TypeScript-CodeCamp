@@ -404,3 +404,36 @@ printName(person);
 let animal = { species: "Dog" };
 ```
 > In TypeScript, constraints are used to restrict the types of values that can be used with a generic type. When working with generic types, you can use constraints to ensure that the type of value being used meets certain requirements.
+
+---
+
+#### 17. Decorator
+> Decorator in TypeScript is a special syntax that can be used to modify the behavior of a class, method, property, or parameter. Decorators can be used to add metadata to your code, to change the behavior of a class or its members, or to implement aspect-oriented programming (AOP) techniques.
+
+```ts, 
+function logMethod(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  descriptor.value = function(...args: any[]) {
+    console.log(`Calling method ${propertyKey} with arguments`, args);
+    const result = originalMethod.apply(this, args);
+    console.log(`Method ${propertyKey} returned`, result);
+    return result;
+  };
+}
+
+class UserService {
+  @logMethod
+  getUser(id: number) {
+    return { id: id, name: "John" };
+  }
+}
+
+const userService = new UserService();
+userService.getUser(1);
+// Output:
+// Calling method getUser with arguments [ 1 ]
+// Method getUser returned Object { id: 1, name: "John" }
+```
+> The ``logMethod`` decorator is used to log information about a method before and after it is called. The ``logMethod`` decorator takes three arguments: ``target``, ``propertyKey``, and ``descriptor``. The ``target`` argument is the instance of the class that the method belongs to, the ``propertyKey`` argument is the name of the method, and the ``descriptor`` argument is a property descriptor that can be used to modify the behavior of the method.
+
+> In the implementation of the ``logMethod`` decorator, we use the ``descriptor.value`` property to get a reference to the original method, and then we use the ``descriptor.value`` property to assign a new function that wraps the original method and logs information about it before and after it is called.
