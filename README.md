@@ -580,3 +580,33 @@ console.log(user);
 // User { _name: "John", _email: "john@example.com" }
 ```
  > The ``required`` decorator sets a getter and setter on the decorated properties that validate the presence of a value. When the value of a decorated property is set to ``undefined`` or ``null``, the setter throws an error indicating that the property is required
+
+---
+
+#### 21. DOM Element Selection & OOP Rendering
+
+```ts,
+ class Form {
+  private formElement: HTMLFormElement;
+
+  constructor(selector: string) {
+    this.formElement = document.querySelector(selector);
+    if (!this.formElement) {
+      throw new Error(`Cannot find form with selector "${selector}"`);
+    }
+    this.render();
+  }
+
+  private render() {
+    this.formElement.innerHTML = `
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button>Sign In</button>
+    `;
+  }
+}
+
+const form = new Form("#sign-in-form");
+console.log(form);
+```
+> The ``Form`` class is used to select a form element from the DOM using a selector, and render the form content using OOP concepts. The ``render`` method is used to render the content of the form, and the class constructor is used to select the form element and render the form content. This approach can be extended to handle more complex rendering scenarios and allow for easy maintenance and reuse of code.
