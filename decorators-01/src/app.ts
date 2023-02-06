@@ -149,17 +149,16 @@ function validate(obj: any){
     return true;
   }
   for(const prop in objValidatorConfig){
-  for(const validator of objValidatorConfig[prop]){
-    switch(validator) {
-      case 'required':
-        return !!obj[prop];
-      case 'positive':
-        return obj[prop] > 0;
+    for(const validator of objValidatorConfig[prop]){
+      switch(validator) {
+        case 'required':
+          return !!obj[prop];
+        case 'positive':
+          return obj[prop] > 0;
+      }
     }
-
   }
-  }
-
+  return true;
 }
 
 class Course {
