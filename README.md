@@ -610,3 +610,40 @@ const form = new Form("#sign-in-form");
 console.log(form);
 ```
 > The ``Form`` class is used to select a form element from the DOM using a selector, and render the form content using OOP concepts. The ``render`` method is used to render the content of the form, and the class constructor is used to select the form element and render the form content. This approach can be extended to handle more complex rendering scenarios and allow for easy maintenance and reuse of code.
+
+---
+
+#### 22. Interacting with DOM Elements
+
+```ts,
+class Form {
+  private formElement: HTMLFormElement;
+  private submitButton: HTMLButtonElement;
+
+  constructor(selector: string) {
+    this.formElement = document.querySelector(selector);
+    if (!this.formElement) {
+      throw new Error(`Cannot find form with selector "${selector}"`);
+    }
+    this.submitButton = this.formElement.querySelector("button");
+    this.submitButton.addEventListener("click", this.submitForm.bind(this));
+    this.render();
+  }
+
+  private render() {
+    this.formElement.innerHTML = `
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button>Sign In</button>
+    `;
+  }
+
+  private submitForm() {
+    console.log("Form submitted!");
+  }
+}
+
+const form = new Form("#sign-in-form");
+console.log(form);
+```
+> The ``Form`` class is used to select a form element from the DOM using a selector, and render the form content using OOP concepts. The ``render`` method is used to render the content of the form, and the class constructor is used to select the form element, the submit button, and add a click event listener to the submit button. When the submit button is clicked, the ``submitForm`` method will be called, which will log a message to the console. This approach can be extended to handle more complex interaction scenarios and allow for easy maintenance and reuse of code.
