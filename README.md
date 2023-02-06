@@ -545,3 +545,38 @@ console.log(getName());
 ```
 
 > The Autobind decorator is used to bind the ``this`` keyword to the correct value when calling the ``getName`` method. This means that the method can be called as a standalone function, and it will still refer to the ``User`` instance, not the global context.
+
+
+---
+
+#### 20. Validation with Decorators
+```ts,
+function required(target: any, propertyKey: string) {
+  Object.defineProperty(target, propertyKey, {
+    get() {
+      return this["_" + propertyKey];
+    },
+    set(value) {
+      if (!value) {
+        throw new Error(`${propertyKey} is required.`);
+      }
+      this["_" + propertyKey] = value;
+    },
+  });
+}
+
+class User {
+  @required
+  name!: string;
+  @required
+  email!: string;
+}
+
+const user = new User();
+user.name = "John";
+user.email = "john@example.com";
+console.log(user);
+// Output:
+// User { _name: "John", _email: "john@example.com" }
+```
+ > The ``required`` decorator sets a getter and setter on the decorated properties that validate the presence of a value. When the value of a decorated property is set to ``undefined`` or ``null``, the setter throws an error indicating that the property is required
