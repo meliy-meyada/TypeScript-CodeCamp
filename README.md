@@ -647,3 +647,51 @@ const form = new Form("#sign-in-form");
 console.log(form);
 ```
 > The ``Form`` class is used to select a form element from the DOM using a selector, and render the form content using OOP concepts. The ``render`` method is used to render the content of the form, and the class constructor is used to select the form element, the submit button, and add a click event listener to the submit button. When the submit button is clicked, the ``submitForm`` method will be called, which will log a message to the console. This approach can be extended to handle more complex interaction scenarios and allow for easy maintenance and reuse of code.
+
+
+#### 23. Rendering Project Items with a Class
+
+```ts,
+class ProjectItem {
+  constructor(public id: string, public title: string, public description: string) {}
+
+  render() {
+    const itemEl = document.createElement("li");
+    itemEl.innerHTML = `
+      <h2>${this.title}</h2>
+      <p>${this.description}</p>
+    `;
+    itemEl.id = this.id;
+    return itemEl;
+  }
+}
+
+class ProjectList {
+  private projects: ProjectItem[] = [];
+
+  constructor(private type: "active" | "finished") {
+    const prjItems = document.querySelectorAll(`#${type}-projects li`);
+    for (const prjItem of prjItems) {
+      const id = prjItem.id;
+      const title = prjItem.querySelector("h2")!.textContent!;
+      const description = prjItem.querySelector("p")!.textContent!;
+      this.projects.push(new ProjectItem(id, title, description));
+    }
+    this.renderProjects();
+  }
+
+  private renderProjects() {
+    const listEl = document.querySelector(`#${this.type}-projects ul`)!;
+    listEl.innerHTML = "";
+    for (const prjItem of this.projects) {
+      const listItem = prjItem.render();
+      listEl.appendChild(listItem);
+    }
+  }
+}
+
+const activeProjectList = new ProjectList("active");
+const finishedProjectList = new ProjectList("finished");
+```
+
+> The ``ProjectItem`` class is used to represent each item in the project list, and the ``ProjectList`` class is used to manage the list of project items. The ``ProjectItem`` class has a render method that creates a new DOM element for each project item. The ``ProjectList`` class has a constructor that selects the project items from the DOM and creates a new ``ProjectItem`` instance for each item, and a ``renderProjects`` method that renders the list of project items on the screen. This approach can be extended to handle more complex rendering scenarios and allow for easy maintenance and reuse of code.
