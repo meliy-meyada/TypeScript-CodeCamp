@@ -648,7 +648,7 @@ console.log(form);
 ```
 > The ``Form`` class is used to select a form element from the DOM using a selector, and render the form content using OOP concepts. The ``render`` method is used to render the content of the form, and the class constructor is used to select the form element, the submit button, and add a click event listener to the submit button. When the submit button is clicked, the ``submitForm`` method will be called, which will log a message to the console. This approach can be extended to handle more complex interaction scenarios and allow for easy maintenance and reuse of code.
 
-
+---
 #### 23. Rendering Project Items with a Class
 
 ```ts,
@@ -695,3 +695,49 @@ const finishedProjectList = new ProjectList("finished");
 ```
 
 > The ``ProjectItem`` class is used to represent each item in the project list, and the ``ProjectList`` class is used to manage the list of project items. The ``ProjectItem`` class has a render method that creates a new DOM element for each project item. The ``ProjectList`` class has a constructor that selects the project items from the DOM and creates a new ``ProjectItem`` instance for each item, and a ``renderProjects`` method that renders the list of project items on the screen. This approach can be extended to handle more complex rendering scenarios and allow for easy maintenance and reuse of code.
+
+---
+#### 24. Utilizing Interfaces to Implement Drag & Drop
+
+```ts,
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(event: DragEvent): void;
+}
+
+class Project implements Draggable {
+  constructor(public id: string, public title: string, public description: string, public people: number) {}
+
+  dragStartHandler(event: DragEvent) {
+    event.dataTransfer!.setData("text/plain", this.id);
+    event.dataTransfer!.effectAllowed = "move";
+  }
+
+  dragEndHandler(_: DragEvent) {
+    console.log("DragEnd");
+  }
+}
+
+class ProjectList {
+  private projects: Project[] = [];
+
+  constructor(private type: "active" | "finished") {
+    const prjItems = document.querySelectorAll(`#${type}-projects li`);
+    for (const prjItem of prjItems) {
+      const id = prjItem.id;
+      const title = prjItem.querySelector("h2")!.textContent!;
+      const description = prjItem.querySelector("p")!.textContent!;
+      const people = +prjItem.querySelector("span")!.textContent!;
+      const project = new Project(id, title, description, people);
+      prjItem.addEventListener("dragstart", project.dragStartHandler.bind(project));
+      prjItem.addEventListener("dragend", project.dragEndHandler);
+      this.projects.push(project);
+    }
+  }
+}
+
+new ProjectList("active");
+new ProjectList("finished");
+```
+
+> The ``Draggable`` interface defines the ``dragStartHandler`` and ``dragEndHandler`` methods that a draggable object should have. The ``Project`` class implements this interface, and provides its own implementation of the methods. The ``ProjectList`` class creates a new ``Project`` instance for each project item, and adds event listeners for the ``dragstart`` and ``dragend`` events to handle the drag and drop behavior. By using interfaces in this way, you can ensure that only objects that have the necessary properties and methods can be dragged.
