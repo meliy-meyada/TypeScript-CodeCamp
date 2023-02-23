@@ -741,3 +741,27 @@ new ProjectList("finished");
 ```
 
 > The ``Draggable`` interface defines the ``dragStartHandler`` and ``dragEndHandler`` methods that a draggable object should have. The ``Project`` class implements this interface, and provides its own implementation of the methods. The ``ProjectList`` class creates a new ``Project`` instance for each project item, and adds event listeners for the ``dragstart`` and ``dragend`` events to handle the drag and drop behavior. By using interfaces in this way, you can ensure that only objects that have the necessary properties and methods can be dragged.
+---
+
+#### 25. Working with Namespaces
+
+> In TypeScript, namespaces provide a way to organize your code into logical groups, and avoid naming conflicts with other code. A namespace is simply a named scope that can contain functions, classes, interfaces, and other objects.
+
+```ts,
+namespace MathUtils {
+  export function add(a: number, b: number): number {
+    return a + b;
+  }
+
+  export function subtract(a: number, b: number): number {
+    return a - b;
+  }
+}
+
+const result1 = MathUtils.add(10, 5); // returns 15
+const result2 = MathUtils.subtract(10, 5); // returns 5
+```
+
+> In this example, the ``MathUtils`` namespace contains two functions: ``add`` and ``subtract``. These functions are exported using the ``export`` keyword, which makes them accessible from outside the namespace. To use the functions, you simply call them using the namespace name as a prefix.
+
+>Namespaces can also be nested inside other namespaces, and can be split across multiple files using the ``/// <reference path="filename.ts" />`` syntax.
