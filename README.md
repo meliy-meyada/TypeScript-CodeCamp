@@ -765,3 +765,27 @@ const result2 = MathUtils.subtract(10, 5); // returns 5
 > In this example, the ``MathUtils`` namespace contains two functions: ``add`` and ``subtract``. These functions are exported using the ``export`` keyword, which makes them accessible from outside the namespace. To use the functions, you simply call them using the namespace name as a prefix.
 
 >Namespaces can also be nested inside other namespaces, and can be split across multiple files using the ``/// <reference path="filename.ts" />`` syntax.
+
+---
+
+#### 26. Using ES Modules
+
+>To use ES modules in TypeScript, you can use the ``import`` and ``export`` keywords to define and use modules.
+
+```ts,
+// my-module.ts
+export function myFunction() {
+  console.log("Hello from myFunction!");
+}
+
+export const myVariable = "Hello from myVariable!";
+```
+> In this example, Using the ``import`` keyword to import the ``myFunction`` and ``myVariable`` exports from the ``my-module`` module.
+
+```ts,
+// main.ts
+import { myFunction, myVariable } from "./my-module";
+
+myFunction(); // Output: "Hello from myFunction!"
+console.log(myVariable); // Output: "Hello from myVariable!"
+```
