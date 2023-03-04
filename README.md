@@ -789,3 +789,87 @@ import { myFunction, myVariable } from "./my-module";
 myFunction(); // Output: "Hello from myFunction!"
 console.log(myVariable); // Output: "Hello from myVariable!"
 ```
+---
+
+#### 27. Adding a Production Workflow
+
+> Adding a production workflow to a TypeScript project typically involves creating a production build that is optimized for performance, and automating the build and deployment process.
+
+> To create a production build, you typically want to use a bundler like webpack or Rollup to bundle your code and assets into a single file, and use a tool like UglifyJS or Terser to minify and optimize the JavaScript code.
+
+>Here's an example ``webpack.config.js`` file that creates a production build:
+
+```js,
+// webpack.config.js
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {},
+        },
+      }),
+    ],
+  },
+};
+```
+
+> In this example, we use the ``TerserPlugin`` to minify and optimize the JavaScript code. We also set the ``mode`` option to ``"production"`` to enable production optimizations.
+
+> Once you have a production build, you can automate the build and deployment process using a tool like GitHub Actions or Jenkins. This typically involves configuring a build script that runs the production build and deploys the built files to a server or hosting platform.
+
+> Here's an example GitHub Actions workflow that builds and deploys a TypeScript project to GitHub Pages:
+
+```yaml,
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+```
+> In this example, the workflow is triggered on every push to the ``main`` branch. The build job checks out the code, installs dependencies, ``builds`` the production bundle using ``npm run build``, and deploys the built files to GitHub Pages using the ``peaceiris/actions-gh-pages`` GitHub Action.
+
+
