@@ -974,3 +974,53 @@ console.log(plainData.address.city); // "Anytown"
 > ``class-transformer`` also supports a variety of advanced features, such as custom transformations, exclusion and inclusion strategies, circular references, and more. For more information, see the ``class-transformer`` documentation.
 
 
+---
+
+#### 30. TypeScript-embracing: class-validator.
+
+> ``class-validator`` is a TypeScript library that provides a set of decorators and validator functions to validate class instances and plain JavaScript objects.
+
+> One of the key features of ``class-validator`` is its ability to validate complex object structures, including nested objects, arrays, and maps. To use ``class-validator``, you can define a class or interface that mirrors the structure of the object you want to validate, and then decorate its properties with validation decorators, such as ``IsNotEmpty``, ``IsEmail``, ``IsString``, and many others. For example:
+
+```ts,
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+
+class User {
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+}
+```
+
+> Then, you can use the ``validate`` function from ``class-validator`` to validate an instance of the ``User`` class:
+
+```ts,
+import { validate } from "class-validator";
+
+const user = new User();
+user.name = "Alice";
+user.email = "alice.example.com"; // invalid email format
+
+validate(user).then((errors) => {
+  console.log(errors.length); // 1
+  console.log(errors[0].constraints); // { isEmail: 'email must be an email' }
+});
+```
+> You can also validate plain JavaScript objects by using the ``validateSync`` function, which returns an array of validation errors:
+
+```ts,
+const data = {
+  name: "Bob",
+  email: "bob@example.com",
+};
+
+const errors = validateSync(data);
+console.log(errors.length); // 0 (valid)
+```
+
+> ``class-validator`` also supports a variety of advanced features, such as custom validation rules, conditional validation, message translation, and more. For more information, see the ``class-validator`` documentation.
+
