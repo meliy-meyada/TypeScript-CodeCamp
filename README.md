@@ -913,3 +913,64 @@ declare module "lodash" {
 }
 ```
 > In this example, we specify the target version of ECMAScript, the module system, and some strict compiler options. We also set ``esModuleInterop`` to ``true``, which allows us to use default exports from CommonJS modules (which is the module system used by many JavaScript libraries). Finally, we include the ``"@types/lodash"``module in the include array to tell TypeScript where to find the type definitions for ``lodash``.
+
+
+---
+
+#### 29. No Types Needed: class-transformer.
+
+> ``class-transformer`` is a library that allows you to transform plain JavaScript objects into class instances and vice versa. It can be useful in situations where you want to work with plain data objects, but still take advantage of the benefits of using classes, such as encapsulation, inheritance, and polymorphism.
+
+> One of the key features of ``class-transformer`` is its ability to perform type conversions automatically, without requiring you to define type annotations or interfaces for your data objects. For example, consider the following plain JavaScript object:
+
+```js, 
+const data = {
+  name: "Alice",
+  age: "30",
+  address: {
+    street: "123 Main St",
+    city: "Anytown",
+    state: "CA",
+    zip: "12345",
+  },
+};
+```
+> To convert this object into a class instance, you can define a class that mirrors the shape of the object:
+
+```ts,
+class Person {
+  name: string;
+  age: number;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+}
+```
+> Then, you can use the ``plainToClass`` function from ``class-transformer`` to convert the object to an instance of the ``Person`` class:
+
+```ts, 
+import { plainToClass } from "class-transformer";
+
+const person = plainToClass(Person, data);
+
+console.log(person instanceof Person); // true
+console.log(person.name); // "Alice"
+console.log(person.age); // 30 (automatically converted from a string)
+console.log(person.address.street); // "123 Main St"
+```
+> Similarly, you can use the ``classToPlain`` function to convert a class instance back to a plain JavaScript object:
+
+```ts,
+import { classToPlain } from "class-transformer";
+
+const plainData = classToPlain(person);
+
+console.log(typeof plainData.age); // "string" (automatically converted back from a number)
+console.log(plainData.address.city); // "Anytown"
+```
+> ``class-transformer`` also supports a variety of advanced features, such as custom transformations, exclusion and inclusion strategies, circular references, and more. For more information, see the ``class-transformer`` documentation.
+
+
