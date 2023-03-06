@@ -873,3 +873,43 @@ jobs:
 > In this example, the workflow is triggered on every push to the ``main`` branch. The build job checks out the code, installs dependencies, ``builds`` the production bundle using ``npm run build``, and deploys the built files to GitHub Pages using the ``peaceiris/actions-gh-pages`` GitHub Action.
 
 
+---
+
+#### 28.  Using JavaScript (!) Libraries with TypeScript
+
+> 1. Install the JavaScript library and its type definitions, if available, as a dependency using npm or yarn. For example, to install the popular ``lodash`` library and its type definitions:
+```
+npm install --save lodash @types/lodash
+```
+>
+> 2. n your TypeScript code, import the library as you would in JavaScript. For example, to use the ``map`` function from ``lodash``:
+```ts,
+import * as _ from "lodash";
+
+const numbers = [1, 2, 3];
+const doubledNumbers = _.map(numbers, (n) => n * 2);
+```
+> Note that we use the ``import * as`` syntax to import the entire library as a namespace, which allows us to access its functions and properties using dot notation.
+> 3. If the library doesn't have its own type definitions, or if the existing type definitions are incomplete or incorrect, you can create your own type definitions. This involves creating a ``.d.ts`` file that declares the types for the library's functions and properties. For example, here's a simple type definition for the ``map`` function from ``lodash``:
+```ts,
+declare module "lodash" {
+  function map<T, U>(collection: T[], iteratee: (value: T) => U): U[];
+}
+```
+> This declares a new module called ``"lodash"``, and adds a type declaration for the ``map`` function that accepts an array ``collection`` and an ``iteratee`` function that transforms each element of the array. You can add more type declarations as needed.
+> 4. Finally, you need to configure your TypeScript compiler to recognize the library and its type definitions. To do this, add the library to the ``include`` array in your ``tsconfig.json`` file, and add any necessary compiler options. For example:
+```json,
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*",
+    "node_modules/@types/lodash/index.d.ts"
+  ]
+}
+```
+> In this example, we specify the target version of ECMAScript, the module system, and some strict compiler options. We also set ``esModuleInterop`` to ``true``, which allows us to use default exports from CommonJS modules (which is the module system used by many JavaScript libraries). Finally, we include the ``"@types/lodash"``module in the include array to tell TypeScript where to find the type definitions for ``lodash``.
