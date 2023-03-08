@@ -4,3 +4,4 @@ ts-camp/package-lock.json
 .vscode/launch.json
 cl-interfaces-01/package-lock.json
 cl-interfaces-01/.npmrc
+prj-libs-01/src/config.ts
