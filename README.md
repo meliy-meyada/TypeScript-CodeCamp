@@ -1024,3 +1024,38 @@ console.log(errors.length); // 0 (valid)
 
 > ``class-validator`` also supports a variety of advanced features, such as custom validation rules, conditional validation, message translation, and more. For more information, see the ``class-validator`` documentation.
 
+---
+
+#### 31. Getting User Input with "refs".
+
+> In React with TypeScript, you can use refs to get user input from form elements (e.g. input, select) and use it in your components. Here's an example:
+
+```ts,
+import { useRef } from 'react';
+
+function MyForm() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const inputValue = inputRef.current?.value;
+    console.log(inputValue);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" ref={inputRef} />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+>In the example above, the ``MyForm`` component uses the ``useRef`` hook to create a reference to the ``input`` element. The type of the reference is defined as ``HTMLInputElement`` since we know that the ref is attached to an ``input`` element.
+
+>The ``handleSubmit`` function is called when the form is submitted. It prevents the default form submission behavior and gets the value of the input field using the ``current`` property of the ``inputRef`` reference. The ``current`` property may be null so we use the optional chaining operator ``(?.)`` to avoid errors.
+
+>Finally, the input element uses the ``ref`` prop to attach the reference to the input element.
